@@ -4,8 +4,8 @@ import { useAuth } from "react-oidc-context";
 
 // Example posts (you can customize this part based on your app's content)
 const posts = [
-  { title: "/", content: "API V1" },
-  { title: "/authentication", content: "_POST" },
+  { title: "/", content: "API V1", body: "api.bittasker.xyz"},
+  { title: "/authentication", content: "_POST", body: "api.bittasker.xyz"},
 ];
 
 function App() {
@@ -62,6 +62,7 @@ function App() {
             <Card.Body>
               <Card.Title>{post.title}</Card.Title>
               <Card.Text>{post.content}</Card.Text>
+			  <Card.Text>{post.body}</Card.Text>
             </Card.Body>
           </Card>
         ))}
