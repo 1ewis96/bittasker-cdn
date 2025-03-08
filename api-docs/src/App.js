@@ -1,42 +1,32 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Navbar, Card } from "react-bootstrap";
 
-const App = () => {
+const posts = [
+  { title: "First Blog Post", content: "This is my first blog post!" },
+  { title: "Second Blog Post", content: "This is my second blog post!" },
+];
+
+function App() {
   return (
-    <div className="container mt-5">
-      <header className="mb-4 border-bottom pb-3">
-        <h1 className="text-center">API Documentation</h1>
-        <p className="text-center text-muted">Simple, modern, and clean API reference</p>
-      </header>
-      <section>
-        <h2>Authentication</h2>
-        <p>To use our API, include your API key in the request header:</p>
-        <pre className="bg-light p-3 border rounded">
-          {`curl -H "Authorization: Bearer YOUR_API_KEY" https://api.example.com/data`}
-        </pre>
-      </section>
-      <section>
-        <h2>Endpoints</h2>
-        <div className="card mb-3">
-          <div className="card-body">
-            <h5 className="card-title">GET /users</h5>
-            <p className="card-text">Fetches a list of users.</p>
-            <pre className="bg-light p-3 border rounded">
-              {`{
-  "users": [
-    { "id": 1, "name": "John Doe" },
-    { "id": 2, "name": "Jane Smith" }
-  ]
-}`}
-            </pre>
-          </div>
-        </div>
-      </section>
-      <footer className="text-center mt-5">
-        <p className="text-muted">&copy; 2025 API Docs. All rights reserved.</p>
-      </footer>
-    </div>
+    <>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#">My React Blog</Navbar.Brand>
+        </Container>
+      </Navbar>
+
+      <Container className="mt-4">
+        {posts.map((post, index) => (
+          <Card key={index} className="mb-3">
+            <Card.Body>
+              <Card.Title>{post.title}</Card.Title>
+              <Card.Text>{post.content}</Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
+      </Container>
+    </>
   );
-};
+}
 
 export default App;
