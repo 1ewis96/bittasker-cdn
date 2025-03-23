@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap";
 import useAuthCheck from "../hooks/auth/TokenValidation"; // Assuming this hook checks for auth
 import Navigation from "./Navigation";
-import Footer from "./Footer";
+
 
 const Settings = () => {
   const { isAuthenticated, loading } = useAuthCheck(); // Auth check and loading state
@@ -86,7 +86,7 @@ const Settings = () => {
           </>
         )}
       </Container>
-      <Footer />
+
     </>
   );
 };
