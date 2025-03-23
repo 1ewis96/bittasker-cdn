@@ -1,79 +1,33 @@
-import React from "react";
-import { Container, Navbar, Card } from "react-bootstrap";
-import { useAuth } from "react-oidc-context";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './context/UserContext'; // Import UserProvider
 
-// Example posts (you can customize this part based on your app's content)
-const posts = [
-  { title: "/", content: "API V1", body: "api.bittasker.xyz"},
-  { title: "/authentication", content: "_POST", body: "api.bittasker.xyz"},
-];
+import Home from './pages/Home';
+import Wallet from './pages/Wallet';
+import Map from './pages/Map';
+import Swap from './pages/Swap';
+import Settings from './pages/Settings';
+import CognitoCallback from './hooks/auth/CognitoCallback';
+import CognitoCallbackClear from './hooks/auth/CognitoCallbackClear';
+
+import useAuthCheck from "./hooks/auth/TokenValidation";
+
 
 function App() {
-  const auth = useAuth();
-
-  // This function redirects the user to the Cognito logout endpoint
-  const signOutRedirect = () => {
-    const clientId = "1us07g33qbs5l00sdr1grcg2aj"; // Your App Client ID
-    const logoutUri = "https://cdn.bittasker.xyz"; // Redirect after logout (root domain)
-    const cognitoDomain = "https://auth.bittasker.xyz";
-    
-    // Redirect user to Cognito logout
-    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-  };
-
-  // Loading state while authentication is in progress
-  if (auth.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  // Error state if there was an error during authentication
-  if (auth.error) {
-    return <div>Error: {auth.error.message}</div>;
-  }
-
-  // Authenticated state - show user profile information and tokens
-  if (auth.isAuthenticated) {
-    return (
-      <div>
-        <pre>Hello: {auth.user?.profile.email}</pre>
-        <pre>ID Token: {auth.user?.id_token}</pre>
-        <pre>Access Token: {auth.user?.access_token}</pre>
-        <pre>Refresh Token: {auth.user?.refresh_token}</pre>
-
-        {/* Button to sign out */}
-        <button onClick={() => auth.removeUser()}>Sign out</button>
-      </div>
-    );
-  }
-
-  // If not authenticated, show the main page with posts
   return (
-    <>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#">BitTasker Docs</Navbar.Brand>
-        </Container>
-      </Navbar>
-
-      <Container className="mt-4">
-        {/* Display posts */}
-        {posts.map((post, index) => (
-          <Card key={index} className="mb-3">
-            <Card.Body>
-              <Card.Title>{post.title}</Card.Title>
-              <Card.Text>{post.content}</Card.Text>
-			  <Card.Text>{post.body}</Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
-      </Container>
-
-      <div>
-        {/* Buttons for Sign In and Sign Out */}
-        <button onClick={() => auth.signinRedirect()}>Sign in</button>
-        <button onClick={signOutRedirect}>Sign out</button>
-      </div>
-    </>
+    <UserProvider> {/* Wrap your app with UserProvider */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/swap" element={<Swap />} />
+          <Route path="/auth/callback" element={<CognitoCallback />} />
+          <Route path="/auth/callback/clear" element={<CognitoCallbackClear />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 
