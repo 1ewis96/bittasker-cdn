@@ -48,7 +48,7 @@ const Settings = () => {
             {/* Card for API Key Generation */}
             <Row className="justify-content-center">
               <Col md={8} lg={6}>
-                <Card className="text-center bg-light text-white shadow-lg p-4">
+                <Card className="text-center bg-light text-black shadow-lg p-4">
                   <Card.Body>
                     <h4>Generate Developer API Key</h4>
                     <p className="mb-3">Get your API key to integrate with our platform and build your app.</p>
@@ -68,7 +68,7 @@ const Settings = () => {
             {/* Card for Bittasker Account Settings */}
             <Row className="justify-content-center mt-4">
               <Col md={8} lg={6}>
-                <Card className="text-center bg-light text-white shadow-lg p-4">
+                <Card className="text-center bg-light text-black shadow-lg p-4">
                   <Card.Body>
                     <h4>Manage Your Account Settings & Security</h4>
                     <p className="mb-3">Visit Bittasker to manage your account settings and security preferences.</p>
