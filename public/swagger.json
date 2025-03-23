@@ -5,8 +5,8 @@
     "description": "API documentation for the BitTasker platform.",
     "version": "0.0.1"
   },
-  "host": "api.bittasker.xyz",  // Define host
-  "schemes": ["https"],         // Define the protocol (https)
+  "host": "api.bittasker.xyz",
+  "schemes": ["https"],
   "basePath": "/",
   "securityDefinitions": {
     "BearerAuth": {
