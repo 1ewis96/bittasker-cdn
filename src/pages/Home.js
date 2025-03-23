@@ -1,51 +1,29 @@
-import React, { useState } from "react";
-import { Container, Navbar, Card} from "react-bootstrap";
+// src/pages/Home.js
+import React from "react";
 import { useAuth } from "react-oidc-context";
-import HeroSection from "../pages/HeroSection"; // Import the component
-import Navigation from "../pages/Navigation"; // Import the component
-import Footer from "../pages/Footer"; // Import the component
-
+import Navigation from "../pages/Navigation";
+import Footer from "../pages/Footer";
+import APIDocumentation from "../components/APIDocumentation"; // Import the API documentation component
 
 const Home = () => {
+  const auth = useAuth();
 
-const s3Bucket = process.env.REACT_APP_S3_URL;
-const auth = useAuth();
-
-  // Authenticated state.
-  if (auth.isAuthenticated) {
-    return (
-	    <>
-      <Navigation /> {/* Use the component here */}
-	  
-	 <div>
-      <HeroSection /> {/* Use the component here */}
-    </div>
-
-<Container className="mt-4">
-      <Footer /> {/* Use the component here */}
-</Container>
-
-  
-    </>
-    );
-  }
-
-  // Uunauthenticated state.
   return (
     <>
-      <Navigation /> {/* Use the component here */}
-	  
-	 <div>
-      <HeroSection /> {/* Use the component here */}
-    </div>
+      <Navigation />
 
-	
+      {/* Hero Section */}
+      <header className="bg-dark text-white text-center py-5">
+        <h1>📡 BitTasker API Documentation</h1>
+        <p className="lead">Integrate seamlessly with our powerful API.</p>
+      </header>
 
-<Container className="mt-4">
-      <Footer /> {/* Use the component here */}
-</Container>
+      {/* Show API documentation for all users */}
+      <APIDocumentation />
 
-
+      <Container className="mt-4">
+        <Footer />
+      </Container>
     </>
   );
 };

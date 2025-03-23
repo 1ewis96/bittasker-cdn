@@ -30,7 +30,7 @@ const Navigation = () => {
             height="30"
             className="d-inline-block align-top me-2"
           />
-          BitTasker
+          BitTasker Docs
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
