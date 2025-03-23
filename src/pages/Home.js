@@ -1,6 +1,7 @@
 // src/pages/Home.js
 import React from "react";
 import { useAuth } from "react-oidc-context";
+import { Container } from "react-bootstrap";
 import Navigation from "../pages/Navigation";
 import Footer from "../pages/Footer";
 import APIDocumentation from "../components/APIDocumentation"; // Import the API documentation component
