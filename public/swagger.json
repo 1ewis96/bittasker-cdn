@@ -5,7 +5,22 @@
     "description": "API documentation for the BitTasker platform.",
     "version": "0.0.1"
   },
-  "basePath": "https://api.bittasker.xyz",
+  "host": "api.bittasker.xyz",  // Define host
+  "schemes": ["https"],         // Define the protocol (https)
+  "basePath": "/",
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter your bearer token as: Bearer {token}"
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
   "paths": {
     "/auth/login": {
       "post": {
@@ -45,6 +60,11 @@
       "get": {
         "summary": "Get users list",
         "tags": ["Users"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of users",

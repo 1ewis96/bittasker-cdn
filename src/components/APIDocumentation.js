@@ -6,7 +6,7 @@ const APIDocumentation = () => {
   useEffect(() => {
     SwaggerUI.SwaggerUIBundle({
       dom_id: "#swagger-ui", // The element where Swagger UI will be rendered
-      url: "swagger.json", // Path to your Swagger JSON
+      url: "https://cdn.bittasker.xyz/swagger.json", // Path to your Swagger JSON
 	  theme: "BaseLayout",
     });
   }, []);
