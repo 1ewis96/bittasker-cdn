@@ -3,13 +3,14 @@
   "info": {
     "title": "BitTasker API",
     "description": "API documentation for the BitTasker platform.",
-    "version": "1.0.0"
+    "version": "0.0.1"
   },
-  "basePath": "/api",
+  "basePath": "https://api.bittasker.xyz",
   "paths": {
     "/auth/login": {
       "post": {
         "summary": "Authenticate user",
+        "tags": ["Authentication"],
         "parameters": [
           {
             "name": "username",
@@ -43,6 +44,7 @@
     "/users": {
       "get": {
         "summary": "Get users list",
+        "tags": ["Users"],
         "responses": {
           "200": {
             "description": "List of users",
