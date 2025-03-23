@@ -5,7 +5,7 @@
     "description": "API documentation for the BitTasker platform.",
     "version": "0.0.1"
   },
-  "host": "api.bittasker.xyz",
+  "host": "api.bittasker.xyz", 
   "schemes": ["https"],
   "basePath": "/",
   "securityDefinitions": {
@@ -22,52 +22,13 @@
     }
   ],
   "paths": {
-    "/auth/login": {
-      "post": {
-        "summary": "Authenticate user",
-        "tags": ["Authentication"],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "body",
-            "description": "User's email",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "body",
-            "description": "User's password",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully authenticated"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/users": {
+    "/profile/avatar": {
       "get": {
-        "summary": "Get users list",
-        "tags": ["Users"],
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
+        "summary": "Retrieve all available avatars",
+        "tags": ["Profile"],
         "responses": {
           "200": {
-            "description": "List of users",
+            "description": "List of available avatars",
             "schema": {
               "type": "array",
               "items": {
@@ -76,15 +37,121 @@
                   "id": {
                     "type": "integer"
                   },
-                  "name": {
+                  "url": {
                     "type": "string"
                   },
-                  "email": {
+                  "description": {
                     "type": "string"
                   }
                 }
               }
             }
+          }
+        }
+      },
+      "post": {
+        "summary": "Update the account avatar",
+        "tags": ["Profile"],
+        "parameters": [
+          {
+            "name": "avatar",
+            "in": "body",
+            "description": "ID of the avatar to set",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "avatar": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Avatar successfully updated"
+          },
+          "400": {
+            "description": "Bad request (invalid avatar ID)"
+          }
+        }
+      }
+    },
+    "/profile/me": {
+      "get": {
+        "summary": "Retrieve user profile information",
+        "tags": ["Profile"],
+        "responses": {
+          "200": {
+            "description": "User profile information",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "avatar": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cognito/password": {
+      "post": {
+        "summary": "Update account password",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "name": "previousPassword",
+            "in": "body",
+            "description": "Previous password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "newPassword",
+            "in": "body",
+            "description": "New password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "confirmPassword",
+            "in": "body",
+            "description": "Confirmation of the new password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password successfully updated"
+          },
+          "400": {
+            "description": "Bad request (password mismatch or invalid password)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid or missing bearer token)"
           }
         }
       }
