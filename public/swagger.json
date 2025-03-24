@@ -155,6 +155,54 @@
           }
         }
       }
+    },
+    "/cognito/auth/metamask": {
+      "post": {
+        "summary": "Generate nonce for MetaMask authentication",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "name": "ethAddress",
+            "in": "body",
+            "description": "Ethereum address for MetaMask authentication",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ethAddress": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nonce generated successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "nonce": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "message": "Nonce generated and stored successfully",
+                "nonce": "87db7145-1e85-4621-9929-fd5c13d1b80d"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid Ethereum address)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid or missing bearer token)"
+          }
+        }
+      }
     }
   }
 }
