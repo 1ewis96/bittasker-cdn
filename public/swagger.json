@@ -203,6 +203,42 @@
           }
         }
       }
+    },
+    "/cognito/auth/metamask/verify": {
+      "post": {
+        "summary": "Verify MetaMask signature and link Ethereum address",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "name": "verification",
+            "in": "body",
+            "description": "Ethereum address and signature for verification",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ethAddress": {
+                  "type": "string"
+                },
+                "signature": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ethereum address successfully verified and linked"
+          },
+          "400": {
+            "description": "Bad request (invalid Ethereum address or signature)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid or missing bearer token)"
+          }
+        }
+      }
     }
   }
 }
