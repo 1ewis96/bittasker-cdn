@@ -239,6 +239,40 @@
           }
         }
       }
+    },
+    "/tx/balance": {
+  "get": {
+    "summary": "Retrieve user's TASK balance from Polygon",
+    "tags": ["Transaction"],
+    "security": [
+      {
+        "BearerAuth": []
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "TASK balance retrieved successfully",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "balance": {
+              "type": "string"
+            },
+            "symbol": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "balance": "999999996.0",
+            "symbol": "TASK"
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized (invalid or missing bearer token)"
+      }
+    }
+  }
     }
   }
 }
